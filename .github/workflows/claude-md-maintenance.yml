@@ -20,7 +20,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Read system prompt
         id: read-prompt
@@ -36,9 +36,10 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           show_full_output: true
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
-            ${{ secrets.ANTHROPIC_API_KEY }}
             ${{ steps.read-prompt.outputs.system_prompt }}
+
             A pull request was just merged into the main branch.
             PR title: ${{ github.event.pull_request.title }}
             PR description: ${{ github.event.pull_request.body }}
