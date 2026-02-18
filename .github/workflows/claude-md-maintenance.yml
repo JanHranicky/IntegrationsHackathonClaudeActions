@@ -35,8 +35,8 @@ jobs:
       - name: Run Claude to update CLAUDE.md
         uses: anthropics/claude-code-action@v1
         with:
-          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
+            ${{ secrets.ANTHROPIC_API_KEY }}
             ${{ steps.read-prompt.outputs.system_prompt }}
             A pull request was just merged into the main branch.
             PR title: ${{ github.event.pull_request.title }}
