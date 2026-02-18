@@ -36,8 +36,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
-          system_prompt: ${{ steps.read-prompt.outputs.system_prompt }}
           prompt: |
+            ${{ steps.read-prompt.outputs.system_prompt }}
             A pull request was just merged into the main branch.
             PR title: ${{ github.event.pull_request.title }}
             PR description: ${{ github.event.pull_request.body }}
