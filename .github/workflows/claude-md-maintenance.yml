@@ -35,6 +35,7 @@ jobs:
       - name: Run Claude to update CLAUDE.md
         uses: anthropics/claude-code-action@v1
         with:
+          show_full_output: true
           prompt: |
             ${{ secrets.ANTHROPIC_API_KEY }}
             ${{ steps.read-prompt.outputs.system_prompt }}
