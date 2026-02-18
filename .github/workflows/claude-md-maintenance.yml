@@ -36,6 +36,7 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           show_full_output: true
+          claude_args: --allow-dangerously-skip-permissions
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
           prompt: |
             ${{ steps.read-prompt.outputs.system_prompt }}
