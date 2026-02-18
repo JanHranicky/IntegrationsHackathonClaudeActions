@@ -1,0 +1,47 @@
+name: Maintenance CLAUDE.md on PR Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  update-claude-md:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Read system prompt
+        id: read-prompt
+        run: |
+          SYSTEM_PROMPT=$(cat .github/prompts/claude-md-system-prompt.md)
+          {
+            echo "system_prompt<<EOF"
+            echo "$SYSTEM_PROMPT"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Run Claude to update CLAUDE.md
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          system_prompt: ${{ steps.read-prompt.outputs.system_prompt }}
+          prompt: |
+            A pull request was just merged into the main branch.
+            PR title: ${{ github.event.pull_request.title }}
+            PR description: ${{ github.event.pull_request.body }}
+
+            Review the changes introduced by this PR and update CLAUDE.md accordingly.
+            If CLAUDE.md does not exist, create it.
+            Create a PR with the changes to the main branch.
