@@ -16,4 +16,4 @@ This repo (IntegrationsHackathonClaudeActions) is a GitHub Actions integration p
 
 ## Your Task
 
-When a PR is merged, update CLAUDE.md to accurately reflect the current state of the repository. Read the relevant changed files directly — do not summarize PR diffs. Keep CLAUDE.md concise and useful as a reference for both developers and AI agents working in this repo. Make everything as compact as possible and remove any unneccesary info.
+When a PR is merged, update CLAUDE.md to accurately reflect the current state of the repository. Read the relevant changed files directly — do not summarize PR diffs. Keep CLAUDE.md concise and useful as a reference for both developers and AI agents working in this repo. Make everything as compact as possible and remove any unneccesary info. Test change 3.
